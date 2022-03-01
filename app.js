@@ -13,28 +13,31 @@ console.log(url)
 .then(data => displaySearchResult(data.data));
  };
 
-
+// search phone 
  const displaySearchResult= phones => {
  const searchResult = document.getElementById('search-result');
  searchResult.textContent ='';
  if (phones.length== 0){
      document.getElementById('no-phone').style.display="block";
+ }else{
+    phones.forEach(phone => {
+        //  console.log(phone);
+         const div= document.createElement('div');
+         div.classList.add('col');
+         div.innerHTML=`<div class="card h-100">
+                        <img src="${phone.image}" class="card-img-top w-50 mx-auto" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title text-center">${phone.phone_name}</h5>
+                             <p class="card-text text-center ">${phone.brand}</p>
+                             <button onclick="phoneDetail('${phone.slug}')" class=" btn btn-success mx-auto"> Details</button>
+                        </div>
+                       </div>`
+                       searchResult.appendChild(div);
+        })
+     } 
  }
- phones.forEach(phone => {
-    //  console.log(phone);
-     const div= document.createElement('div');
-     div.classList.add('col');
-     div.innerHTML=`<div class="card h-100">
-                    <img src="${phone.image}" class="card-img-top w-50 mx-auto" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title text-center">${phone.phone_name}</h5>
-                         <p class="card-text text-center ">${phone.brand}</p>
-                         <button onclick="phoneDetail('${phone.slug}')" class=" btn btn-success mx-auto"> Details</button>
-                    </div>
-                   </div>`
-                   searchResult.appendChild(div);
-    })
- } 
+ 
+//  single seacrh result 
 
  const phoneDetail = (id) =>{
      const url =`https://openapi.programming-hero.com/api/phone/${id}`;
@@ -46,6 +49,9 @@ console.log(url)
  const setDetails = (info) =>{
      console.log(info);
      const phoneDetails = document.getElementById('phone-details');
+    //  clear field 
+     phoneDetails.textContent ='';
+
      const div= document.createElement('div');
      div.classList.add('card');
      div.innerHTML =`

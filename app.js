@@ -3,15 +3,6 @@ const toggoleSpinner = displaySpinner =>{
 const spiner = document.getElementById('spinner');
 spiner.style.display = displaySpinner;
 };
-
-// toggole search Result 
-
-const toggoleSearchResult = displayResult =>{
-    const result= document.getElementById('phone-details');
-    result.style.display= displayResult;
-
-};
-
 // load button hidden 
  document.getElementById('button-load').style.visibility='hidden';
  toggoleSpinner('none');
@@ -38,7 +29,9 @@ toggoleSpinner('block');
  
  if (phones.length == 0 ){
      document.getElementById('no-phone').style.display="block";
-     toggoleSpinner('block');
+     toggoleSpinner('none');
+     const phoneDetails = document.getElementById('phone-details');
+      phoneDetails.innerText =''; 
  }else{
     phones.forEach(phone => {
         //  console.log(phone);
@@ -57,10 +50,14 @@ toggoleSpinner('block');
                        searchResult.appendChild(div);
                        document.getElementById('no-phone').style.display="none";
                        document.getElementById('button-load').style.visibility='visible';
-                       toggoleSpinner('none');              
+                       toggoleSpinner('none');  
+                       const phoneDetails = document.getElementById('phone-details');
+                        phoneDetails.innerText ='';            
         })
      } 
  }
+
+
  
 //  single seacrh result 
 
@@ -77,7 +74,7 @@ toggoleSpinner('block');
 const clearResult = () => {
     const exploreData = Document.getElementById('search-result');
     exploreData.textContent ='';
-    toggoleSearchResult('none'); 
+   
 }
 
  const setDetails = (info) =>{
@@ -110,4 +107,5 @@ const clearResult = () => {
      ` 
      phoneDetails.appendChild(div); 
      window.scrollTo(0,0);
+     toggoleSpinner('none'); 
  }

@@ -1,3 +1,7 @@
 #no-phone{
     display:none;
+};
+
+#button-load{
+    visibility: hidden;
 }

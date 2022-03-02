@@ -4,6 +4,14 @@ const spiner = document.getElementById('spinner');
 spiner.style.display = displaySpinner;
 };
 
+// toggole search Result 
+
+const toggoleSearchResult = displayResult =>{
+    const result= document.getElementById('phone-details');
+    result.style.display= displayResult;
+
+};
+
 // load button hidden 
  document.getElementById('button-load').style.visibility='hidden';
  toggoleSpinner('none');
@@ -28,8 +36,7 @@ toggoleSpinner('block');
  const searchResult = document.getElementById('search-result');
  searchResult.textContent ='';
  
- 
- if (phones.length == 0){
+ if (phones.length == 0 ){
      document.getElementById('no-phone').style.display="block";
      toggoleSpinner('block');
  }else{
@@ -50,8 +57,7 @@ toggoleSpinner('block');
                        searchResult.appendChild(div);
                        document.getElementById('no-phone').style.display="none";
                        document.getElementById('button-load').style.visibility='visible';
-                       toggoleSpinner('none');
-                                    
+                       toggoleSpinner('none');              
         })
      } 
  }
@@ -64,12 +70,14 @@ toggoleSpinner('block');
      .then(res => res.json())
      .then(data => setDetails(data.data));
      toggoleSpinner('block');
+    
  }
 
  //  clear explore content 
 const clearResult = () => {
     const exploreData = Document.getElementById('search-result');
     exploreData.textContent ='';
+    toggoleSearchResult('none'); 
 }
 
  const setDetails = (info) =>{
@@ -78,7 +86,6 @@ const clearResult = () => {
     //  clear field 
      phoneDetails.innerText ='';
      document.getElementById('no-phone').style.display="none";
-     toggoleSpinner('none');
 
      const div= document.createElement('div');
      div.classList.add('card');
@@ -102,4 +109,5 @@ const clearResult = () => {
      </div>;
      ` 
      phoneDetails.appendChild(div); 
+     window.scrollTo(0,0);
  }
